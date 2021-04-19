@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, Text, Image, StyleSheet } from 'react-native'
 import { Button } from '../components/Button'
 
@@ -7,13 +7,21 @@ import colors from '../styles/colors'
 var wateringImage = require('../assets/watering.png')
 
 export function Welcome() {
+    const [visible, setVisible] = useState(false)
+
+    function handleVisibility() {
+        setVisible(!visible)
+    }
+
     return(
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
                 Gerencie {'\n'} suas plantas {'\n'} de forma fácil
             </Text>
 
-            <Image source={wateringImage} style={styles.image} />
+            {visible && (
+                <Image source={wateringImage} style={styles.image} />
+            )}
 
             <Text style={styles.subtitle}>
                 Não esqueça mais de regar suas plantas.
@@ -21,7 +29,7 @@ export function Welcome() {
                 precisar.
             </Text>
 
-            <Button />
+            <Button title=">" onPress={handleVisibility} />
         </SafeAreaView>
     )
 }
